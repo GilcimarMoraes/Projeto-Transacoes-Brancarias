@@ -49,7 +49,7 @@ public class LeitorCSV {
             System.out.println( "x Erro: " + e.getMessage() );
         }
 
-        System.out.println( "\n Total: " + transacoes.size() + "transações lidas." );
+        System.out.println( "\n Total: " + transacoes.size() + " transações lidas." );
         return transacoes;
     }
 }
