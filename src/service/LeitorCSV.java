@@ -28,8 +28,8 @@ public class LeitorCSV {
                 String dataTexto = campos[5];
                 System.out.println( "Data como texto: " + dataTexto );
 
-                LocalDateTime dataConvertida = LocalDateTime.parse( dataTexto );
-                System.out.println( "Data convertida: " + dataConvertida );
+                LocalDateTime dataHora = LocalDateTime.parse( dataTexto );
+                System.out.println( "Data convertida: " + dataHora );
 
                 Transacao t = new Transacao(
                         campos[0],
@@ -37,7 +37,7 @@ public class LeitorCSV {
                         campos[2],
                         campos[3],
                         campos[4],
-                        dataConvertida,
+                        dataHora,
                         new BigDecimal(500.00)
                 );
 
