@@ -1,7 +1,6 @@
 import model.Transacao;
 import service.LeitorCSV;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class LeitorCSVTest {
