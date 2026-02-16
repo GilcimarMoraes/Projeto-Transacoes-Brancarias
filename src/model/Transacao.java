@@ -43,6 +43,6 @@ public class Transacao {
 
     @Override
     public String toString() {
-        return titular + "-" + tipoOperacao + "- R$ " + valor + "-" + dataHora;
+        return titular + " - " + tipoOperacao + " - R$ " + valor + " - " + dataHora;
     }
 }
