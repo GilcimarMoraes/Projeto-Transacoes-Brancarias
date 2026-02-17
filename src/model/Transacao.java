@@ -2,6 +2,7 @@ package model;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Transacao {
 
@@ -44,5 +45,24 @@ public class Transacao {
     @Override
     public String toString() {
         return titular + " - " + tipoOperacao + " - R$ " + valor + " - " + dataHora;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Transacao transacao = (Transacao) o;
+        return Objects.equals(
+                agencia, transacao.agencia) &&
+                Objects.equals(conta, transacao.conta) &&
+                Objects.equals(banco, transacao.banco) &&
+                Objects.equals(titular, transacao.titular) &&
+                Objects.equals(tipoOperacao, transacao.tipoOperacao) &&
+                Objects.equals(dataHora, transacao.dataHora) &&
+                Objects.equals(valor, transacao.valor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(agencia, conta, banco, titular, tipoOperacao, dataHora, valor);
     }
 }
