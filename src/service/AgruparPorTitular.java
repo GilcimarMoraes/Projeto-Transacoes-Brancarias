@@ -19,6 +19,10 @@ public class AgruparPorTitular {
             }
             grupos.get( titular ).add( t );
         }
+
+        for( List<Transacao> lista : grupos.values() ) {
+            lista.sort( (t1, t2 ) -> t1.getDataHora().compareTo( t2.getDataHora() ) );
+        }
         return grupos;
     }
 }

@@ -26,6 +26,8 @@ public class Transacao {
         this.valor = valor;
     }
 
+    public String getConta() { return conta; }
+
     public String getTitular() {
         return titular;
     }
