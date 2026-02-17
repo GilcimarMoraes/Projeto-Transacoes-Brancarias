@@ -14,6 +14,7 @@ public class LeitorCSV {
     public List<Transacao> lerArquivo(String caminho) {
         List<Transacao> transacoes = new ArrayList<>();
         int numeroLinhas = 0;
+        int linhasComErros = 0;
 
         try( BufferedReader br = new BufferedReader( new FileReader( caminho ) ) ) {
             String linha;
@@ -24,26 +25,44 @@ public class LeitorCSV {
                 numeroLinhas++;
                 System.out.println( "Linha " + numeroLinhas + " : " + linha );
 
-                String[] campos =  linha.split(",");
-                String dataTexto = campos[5];
-                System.out.println( "Data como texto: " + dataTexto );
+                try{
+                    String[] campos =  linha.split(",");
 
-                LocalDateTime dataHora = LocalDateTime.parse( dataTexto );
-                System.out.println( "Data convertida: " + dataHora );
+                    if( campos.length < 6 ) {
+                        throw new IllegalArgumentException( "Campos insuficientes!" + campos.length );
+                    }
 
-                Transacao t = new Transacao(
-                        campos[0],
-                        campos[1],
-                        campos[2],
-                        campos[3],
-                        campos[4],
-                        dataHora,
-                        new BigDecimal(500.00)
-                );
+                    String dataTexto = campos[5];
+                    System.out.println( "Data como texto: " + dataTexto );
 
-                transacoes.add(t);
-                System.out.println( "Transação criada para: " + t.getTitular() );
-                System.out.println( "-------------------------------------------" );
+                    LocalDateTime dataHora = LocalDateTime.parse( dataTexto );
+
+                    if(dataHora == null ) {
+                        linhasComErros++;
+                        System.out.println( " x Linha ignorada: data inválida." );
+                        System.out.println( "-".repeat( 40 ) );
+                        continue;
+                    }
+
+                    Transacao t = new Transacao(
+                            campos[0].trim(),
+                            campos[1].trim(),
+                            campos[2].trim(),
+                            campos[3].trim(),
+                            campos[4].trim(),
+                            dataHora,
+                            new BigDecimal(500.00)
+                    );
+
+                    transacoes.add(t);
+                    System.out.println( "Transação criada para: " + t.getTitular() );
+
+                } catch ( Exception e ) {
+                    linhasComErros++;
+                    System.out.println( " x Erro na linha " + numeroLinhas + ":" + e.getMessage() );
+                }
+
+                System.out.println( "-".repeat( 40 ) );
             }
         } catch( IOException e ) {
             System.out.println( "x Erro: " + e.getMessage() );

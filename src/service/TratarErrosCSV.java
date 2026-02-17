@@ -57,7 +57,7 @@ public class TratarErrosCSV {
         corrigida = corrigida.replace("011:", "11:");
 
         if( corrigida.contains( "24:" ) ) {
-            corrigida.replace( "24:", "00:");
+            corrigida = corrigida.replace( "24:", "00:");
             System.out.println( "Corrigindo 24: para 00:" );
         }
 
